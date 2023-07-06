@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ReproListViewHeaders.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <StackLayout>
+
+        <Button Clicked="Button_Clicked" Text="Step 1 : Set Item Source" />
+        <Button
+            BackgroundColor="Blue"
+            Clicked="Button_Clicked_1"
+            Text="Step 2 : Set  Is Grouping Enabled to True" />
+        <Button Clicked="Button_Clicked_2" Text="Step 3: Set Is Grouping Enabled to False " />
+        <ListView
+            x:Name="MainListView"
+            Grid.Row="1"
+            CachingStrategy="RecycleElement"
+            ItemTapped="MainListView_ItemTapped"
+            ItemsSource="{Binding Animals}"
+            RowHeight="80"
+            SelectionMode="Single"
+            VerticalOptions="StartAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <SwipeView SwipeEnded="SwipeView_SwipeEnded">
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem BackgroundColor="LightGreen" Text="Foo" />
+                                    <SwipeItem BackgroundColor="LightPink" Text="Bar" />
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <!--  First Row  -->
+                            <StackLayout
+                                BackgroundColor="GhostWhite"
+                                Orientation="Vertical"
+                                Spacing="5">
+                                <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                                    <Label
+                                        FontFamily="NubbuBold"
+                                        FontSize="Small"
+                                        Text="{Binding Name}"
+                                        TextColor="DimGray" />
+                                    <Label Text="{Binding Location}" TextColor="Black" />
+
+                                    <Label
+                                        FontFamily="NubbuBold"
+                                        FontSize="Small"
+                                        HorizontalOptions="Center"
+                                        TextColor="White">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span BackgroundColor="#555555" Text=" " />
+                                                <Span BackgroundColor="#555555" Text="{Binding Details}" />
+                                                <Span BackgroundColor="#555555" Text=" " />
+                                                <Span BackgroundColor="Olive" Text=" " />
+                                                <Span BackgroundColor="Olive" Text="{Binding ImageUrl}" />
+                                                <Span BackgroundColor="Olive" Text=" " />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <!--  SecondRow  -->
+                                </HorizontalStackLayout>
+
+                            </StackLayout>
+                        </SwipeView>
+                    </ViewCell>
+
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label
+                            FontFamily="NubbuBold"
+                            FontSize="Large"
+                            HorizontalOptions="Center"
+                            Text="{Binding Name}"
+                            TextColor="Purple"
+                            VerticalOptions="Center" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>
